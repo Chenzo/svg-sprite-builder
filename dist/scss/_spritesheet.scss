@@ -1,0 +1,25 @@
+@mixin sprite_circle{
+	width: 40px;
+	height: 40px;
+	background: url($circle_svg) no-repeat;
+}
+@mixin sprite_linkedin{
+	width: 127px;
+	height: 127px;
+	background: url($linkedin_svg) no-repeat;
+}
+@mixin sprite_square{
+	width: 40px;
+	height: 40px;
+	background: url($square_svg) no-repeat;
+}
+@mixin sprite_twitter{
+	width: 126px;
+	height: 126px;
+	background: url($twitter_svg) no-repeat;
+}
+@mixin sprite_youtubes{
+	width: 124px;
+	height: 124px;
+	background: url($youtubes_svg) no-repeat;
+}

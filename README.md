@@ -34,6 +34,7 @@ svn-sprite-builder
 │   ├── css
 │   ├── js
 │   ├── pngs
+│   ├── scss
 │   └── svg
 ├── package.json
 ├── server.js
@@ -83,6 +84,8 @@ $ gulp
 This command outputs the following:
 
 - **/dist/css/spritesheet.css** - a standalone .css file with all the SVGs added inline
+- **/dist/scss/_spritesheet.scss** - a SASS file with all the SVGs added as mixins
+-  **/dist/scss/_spritesheet_vars.scss** - a SASS file with variables of the SVG data for the background source in the `_spritesheet.scss` file.
 - **/dist/svg/spritesheet.svg** - a standlone .svg file containing all the SVGs merged. All symbols are flagged with the original SVGs name
 - **/dist/pngs/[SVG NAME].png** - individual PNGs for use with fall-back scripts and styles for older browsers
 - **/dist/js/svg4everybody.min.js** - polyfill for SVGs in older browsers - https://github.com/jonathantneal/svg4everybody
@@ -108,16 +111,38 @@ to use a sprite, include an element with a class with the svgsptbg_SVGNAME for i
 ```
 <div class="svgsptbg_circle">circle</div>
 ```
+####SASS spritesheet: 
+To use the SASS spritesheet you need to move the SASS files over to your project and include them:
+```scss
+@import "partials/reset";
+@import "partials/base";
+```
+The sprites are created as mixins for ease of use. They're named following this pattern `sprite_[SVG NAME]` Use the following to apply the SVG to your HTML elements:
+
+```scss
+.square {
+	@include sprite_square
+}
+
+/*or*/
+
+.square {
+	&:before {
+		@include sprite_square
+	}
+}
+```
+
 ####.svg spritesheet
 To use the CSS spritesheet, copy the spritesheet.svg file to your site, and then include the following code:
-```
+```html
 <svg class="svgsprite_circle">
 	<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg/spritesheet.svg#circle"></use>
 </svg>
 ```
 you will also need the style to define it's size (which is auto generated an inside the` svg-sprites.html` file:)
 
-```
+```css
 <style>
 	.svgsprite_circle {
 		width: 40px;

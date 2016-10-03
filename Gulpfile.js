@@ -119,8 +119,41 @@ gulp.task('make_css_file', ['svgstore'], function() {
 })
 
 
+gulp.task('make_scss_file', ['svgstore'], function() {
+    
+    var cssOutput = "";
+
+    for (a=0; a<cssarray.length; a++) {
+        var cssline = "@mixin sprite_" + cssarray[a].in + "{\n";
+        cssline += "\twidth: " + cssarray[a].w + "px;\n";
+        cssline += "\theight: " + cssarray[a].h + "px;\n";
+        cssline += "\tbackground: url($" + cssarray[a].in + "_svg) no-repeat;\n";
+        cssline += "}\n";
+
+        //cssline += ".nosvgs .svgsptbg_" + cssarray[a].in + "{\n";
+        //cssline += "background: url(\"pngs/" + cssarray[a].in + ".png\") no-repeat;\n"
+        //cssline += "}\n\n";
+
+        cssOutput += cssline;
+    }
+
+    fs.writeFile('dist/scss/_spritesheet.scss', cssOutput, console.log("_spritesheet.scss created!"));
+
+    cssOutput = "";
+
+    for (a=0; a<cssarray.length; a++) {
+        var cssline = "$" + cssarray[a].in + "_svg: ";
+        cssline += "\"data:image/svg+xml," + cssarray[a].svgxml + "\";\n";
+        cssOutput += cssline + "\n";
+    }
+
+    fs.writeFile('dist/scss/_spritesheet_vars.scss', cssOutput, console.log("_spritesheet_vars.scss created!"));
+})
+
+
+
 //Watch task
-gulp.task('default', ['svgstore', 'sprite-html', 'copyJS', 'make_css_file', 'svg2png'] ,function() {
+gulp.task('default', ['svgstore', 'sprite-html', 'copyJS', 'make_css_file', 'make_scss_file', 'svg2png'] ,function() {
     console.log("Default Gulp Task");
 });
 
