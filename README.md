@@ -151,6 +151,13 @@ you will also need the style to define it's size (which is auto generated an ins
 </style>
 ```
 
+Additional Gulp Commands
+-------------
+To only out the SASS files, use the following command:
+```
+$ gulp sass
+```
+
 
 
 

@@ -157,4 +157,8 @@ gulp.task('default', ['svgstore', 'sprite-html', 'copyJS', 'make_css_file', 'mak
     console.log("Default Gulp Task");
 });
 
+gulp.task("sass", ['svgstore', 'make_css_file', 'make_scss_file'] ,function() {
+    console.log("SASS Only");
+});
+
 
