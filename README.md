@@ -1,0 +1,142 @@
+SVG to SpriteSheet
+===================
+
+
+This gulp project takes a folder of individual SVGs and produces a single `spritesheet.svg` file, a single `spritesheet.css` file, individual standalone fallback *.pngs* for older browsers, and `svg-sprites.html` example file.
+
+It also contains a simple express.js server to serve the svg-sprites.html for easy copy/paste after the sprites have been produced.
+
+The purpose of this is to have a very simple process to take Adobe Illustrator vector graphics, save them as .svgs and then have gulp convert them into a single file that is cacheable and can be rerun when new sprites are required.
+
+----------
+
+
+Installation
+-------------
+
+> **Note:** node.js is required to be installed for all this to work.
+
+Copy all the files in the project to your local drive. Navigate to the svg-sprite-builder folder in terminal and type:
+
+```
+$ npm install
+```
+
+This will download all the nessessary node modules. After this command has run your directory structure should look like this:
+
+```
+svn-sprite-builder
+├── Gulpfile.js
+├── docs
+├── node_modules
+├── README.md
+├── dist
+│   ├── css
+│   ├── js
+│   ├── pngs
+│   └── svg
+├── package.json
+├── server.js
+└── src
+    ├── htmltemplate
+    │   └── svg-sprites.html
+    ├── js
+    │   └── svg4everybody.min.js
+    └── svgs
+```
+
+
+Usage
+-------------
+
+### Quickstart
+
+Put svgs into `/src/svgs` folder, run default gulp command:
+```
+$ gulp
+```
+ 
+Files are output to the `dist` folder. Look at the `svg-sprite.html` file for usage.
+
+### Adobe Illustrator svg output
+
+Have your each of your vector sprites be in their own file. Make sure the artboard is as small as possible. In Illustrator's menu select **Object > Artboards > Fit to Artwork Bounds**
+
+![Fit Artwork](/docs/illustrator-clip.jpg)
+
+> **Note:** The Artboard is the viewBox and width and height of the resulting sprite. It does not need to be tight around the sprite if you want a margin/padding in the sprite itself.
+
+Save the file as SVG format in the `/src/svgs` folder with these settings:
+
+![Illustrator Output Settings](/docs/illustrator-settings.jpg)
+
+### Create Sprites
+
+To combine the svgs and output the spritesheet, in the `svn-sprite-builder` directory, run the default gulp command:
+
+```
+$ gulp
+```
+
+> **Note:** the sprites' id/name is same as the SVG's filename. 
+
+This command outputs the following:
+
+- **/dist/css/spritesheet.css** - a standalone .css file with all the SVGs added inline
+- **/dist/svg/spritesheet.svg** - a standlone .svg file containing all the SVGs merged. All symbols are flagged with the original SVGs name
+- **/dist/pngs/[SVG NAME].png** - individual PNGs for use with fall-back scripts and styles for older browsers
+- **/dist/js/svg4everybody.min.js** - polyfill for SVGs in older browsers - https://github.com/jonathantneal/svg4everybody
+- **/dist/svg-sprites.html** - an example file containing code snippets of all compiled sprites.
+
+### Express Server Example
+
+Included with this project is a simple ExpressJS server to allow for quick and easy testing while building out the spritesheet. While in the `svn-sprite-builder` directory run the following command to launch the server
+
+```
+$ node server.js
+```
+Once the server is running, point your browser to http://localhost:7080 and you'll see the svg-sprites.html page up and running with the code snippets you'll need to use them.
+
+### How to use
+
+####.css spritesheet: *(recommended method)*
+To use the CSS spritesheet, copy and include the spritesheet.css file on your page.
+``` 
+<link rel="stylesheet" href="css/spritesheet.css"/>
+```
+to use a sprite, include an element with a class with the svgsptbg_SVGNAME for instance:
+```
+<div class="svgsptbg_circle">circle</div>
+```
+####.svg spritesheet
+To use the CSS spritesheet, copy the spritesheet.svg file to your site, and then include the following code:
+```
+<svg class="svgsprite_circle">
+	<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg/spritesheet.svg#circle"></use>
+</svg>
+```
+you will also need the style to define it's size (which is auto generated an inside the` svg-sprites.html` file:)
+
+```
+<style>
+	.svgsprite_circle {
+		width: 40px;
+		height: 40px;
+	} 
+</style>
+```
+
+
+
+
+----------
+#### included packages:
+- [gulp-svgstore](https://github.com/w0rm/gulp-svgstore)
+- [gulp-svgmin](https://www.npmjs.com/package/gulp-svgmin)
+- [gulp-teddy](https://www.npmjs.com/package/gulp-teddy)
+- [gulp-cheerio](https://www.npmjs.com/package/gulp-cheerio)
+- [gulp-svg2png](https://www.npmjs.com/package/gulp-svg2png)
+
+
+
+	

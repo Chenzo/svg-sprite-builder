@@ -1,0 +1,69 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG Sprite Examples</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/spritesheet.css">
+    <script src="js/svg4everybody.min.js"></script>
+    <script>svg4everybody(); // run it now or whenever you are ready</script>
+    <style>
+        body { 
+          padding-top:50px; 
+        }
+
+        <loop through='cssarray' val='css'>
+          .svgsprite_{css.in|s} {
+            width: {css.w|s}px;
+            height: {css.h|s}px;
+          }
+
+        </loop>
+    </style>
+</head>
+<body>
+
+    <loop through='cssarray' val='sprite'>
+    <div class="container">
+
+      <h4>{sprite.in}</h4>
+      <ul class="list-group">
+
+        <li class="list-group-item">
+          <div class="media">
+            <div class="media-left">
+              <svg class="svgsprite_{sprite.in}">
+                  <use xlink:href="svg/spritesheet.svg#{sprite.in}"></use>
+              </svg> 
+            </div>
+            <div class="media-body">
+              <code>&lt;svg class="svgsprite_{sprite.in}"><br/>&lt;use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg/spritesheet.svg#{sprite.in}">&lt;/use><br/>&lt;/svg></code>
+            </div>
+          </div>
+        </li>
+
+        <li class="list-group-item">
+          <div class="media">
+            <div class="media-left">
+              <div class="svgsptbg_{sprite.in}">svgd</div>
+            </div>
+            <div class="media-body">
+              <code>&lt;div class=&quot;svgsptbg_circle&quot;&gt;{sprite.in}&lt;/div&gt;</code>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+    </loop>
+
+
+
+</body>
+</html>
+
+
