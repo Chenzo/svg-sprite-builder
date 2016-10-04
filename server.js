@@ -10,9 +10,11 @@ app.use('/svg', express.static(__dirname + '/dist/svg'));
 app.use('/css', express.static(__dirname + '/dist/css'));
 
 
+app.use('/docs', express.static(__dirname + '/docs/'));
+app.get('/docs', function(req, res) {
+  res.sendFile(path.join(__dirname + '/docs/spritesheet-docs.html'));
+});
 
-
-// define the home page route
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/svg-sprites.html'));
 });

@@ -1,3 +1,11 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<title>SVG to SpriteSheet</title>
+
+<xmp theme="united" style="display:none;">
+
 SVG to SpriteSheet
 ===================
 
@@ -123,15 +131,15 @@ The sprites are created as mixins for ease of use. They're named following this 
 
 ```scss
 .square {
-	@include sprite_square
+    @include sprite_square
 }
 
 /*or*/
 
 .square {
-	&:before {
-		@include sprite_square
-	}
+    &:before {
+        @include sprite_square
+    }
 }
 ```
 
@@ -139,17 +147,17 @@ The sprites are created as mixins for ease of use. They're named following this 
 To use the CSS spritesheet, copy the spritesheet.svg file to your site, and then include the following code:
 ```html
 <svg class="svgsprite_circle">
-	<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg/spritesheet.svg#circle"></use>
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="svg/spritesheet.svg#circle"></use>
 </svg>
 ```
 you will also need the style to define it's size (which is auto generated an inside the` svg-sprites.html` file:)
 
 ```css
 <style>
-	.svgsprite_circle {
-		width: 40px;
-		height: 40px;
-	} 
+    .svgsprite_circle {
+        width: 40px;
+        height: 40px;
+    } 
 </style>
 ```
 
@@ -173,4 +181,10 @@ $ gulp sass
 
 
 
-	
+
+    
+
+</xmp>
+
+<script src="strapdown/strapdown.js"></script>
+</html>
